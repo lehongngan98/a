@@ -11,11 +11,16 @@ const DatGojek = () => {
   const [region, setRegion] = useState({ })
 
   const userLocation = async () => {
+    // Yêu cầu quyền truy cập vị trí nền
     let { status } = await Location.requestForegroundPermissionsAsync();
+    // Kiểm tra xem quyền đã được cấp hay chưa
     if (status !== 'granted') {
       console.log('Permission to access location was denied');
     }
+    // Lấy vị trí hiện tại (latitude và longitude) bất đồng bộ
     let location = await Location.getCurrentPositionAsync({});
+
+    // Thiết lập khu vực sử dụng các tọa độ vị trí đã lấy được
     setRegion({
 
         latitude: location.coords.latitude,
